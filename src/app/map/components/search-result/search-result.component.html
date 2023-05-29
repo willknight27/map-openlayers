@@ -1,0 +1,14 @@
+
+<!-- RESULTADOS DE LA BÚSQUEDA -->
+<ul *ngIf="placesRes.length > 0" class="list-group mt-2">
+
+    <li *ngFor="let place of placesRes; let i = index" class="list-group-item list-group-item-action pointer" (click)="goTo()">
+        
+        <h6>{{ place.display_name }}</h6>
+
+        <button 
+            class="btn btn-sm">Direccion
+        </button>
+    </li>
+
+</ul>
