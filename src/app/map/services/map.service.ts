@@ -28,15 +28,18 @@ export class MapService {
 
   createMap(target: string): void {
     this.map = new Map({
+
       target: target,
+      
       layers: [
         new TileLayer({
           source: new OSM(),
         }),
       ],
+      
       view: new View({
-        center: [0, 0],
-        zoom: 2,
+        center: fromLonLat([-71.537450, -35.675147]), // Coordenadas del centro del mapa (Chile)
+        zoom: 6,
         maxZoom: 18,
         constrainResolution: true,
       }),
