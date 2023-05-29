@@ -18,47 +18,44 @@ import VectorSource from 'ol/source/Vector';
   providedIn: 'root'
 })
 export class MapService {
-  map!: Map
+
+  map!: Map;
+  private view!: View;
 
   constructor() {
 
+  }
+
+  createMap(target: string): void {
     this.map = new Map({
-
-      target: 'map',
-
+      target: target,
       layers: [
         new TileLayer({
           source: new OSM(),
         }),
       ],
-
       view: new View({
         center: [0, 0],
-        zoom: 2, maxZoom: 18,
+        zoom: 2,
+        maxZoom: 18,
         constrainResolution: true,
-
-
       }),
-
       controls: defaultControls().extend([
         new Attribution(),
         new FullScreen()
       ])
-
     });
+  }
 
-    // ADd point
-    const latitude = -33.029362; // Latitud del punto
-    const longitude = -71.559535; // Longitud del punto
-
+  addPoint(latitude: number, longitude: number, iconPath: string, scale: number): void {
     const point = new Feature({
       geometry: new Point(fromLonLat([longitude, latitude])),
     });
 
     const iconStyle = new Style({
       image: new Icon({
-        src: '/assets/icon/location-pin.png', // Ruta al archivo de icono que deseas utilizar
-        scale: 0.1
+        src: iconPath,
+        scale: scale
       }),
     });
 
@@ -71,29 +68,26 @@ export class MapService {
     });
 
     this.map.addLayer(vectorLayer);
+  }
 
+  zoomToPoint(latitude: number, longitude: number, zoomLevel: number, duration: number): void {
+    const view = this.map.getView();
+    const center = fromLonLat([longitude, latitude]);
 
-    // Zoom hacia un punto especifico
-    /* zoomToPoint() {
-      const latitude = -33.029362; // Latitud del punto
-      const longitude = -71.559535; // Longitud del punto
-      const zoomLevel = 10; // Nivel de zoom deseado
-      const duration = 1000; // Duracion de la animacion
+    view.animate({
+      center: center,
+      zoom: zoomLevel,
+      duration: duration,
+    });
+  }
 
-      const view = this.map.getView(); */
-
-      /* view.setCenter(fromLonLat([longitude, latitude]));
-      view.setZoom(zoomLevel); */
-
-/*       const center = fromLonLat([longitude, latitude]);
-
-      view.animate({
-        center: center,
-        zoom: zoomLevel,
-        duration: duration,
-      });
-    }
- */
-
+  zoomOut() {
+    // Realiza el zoom out en el mapa
+    // Realiza el zoom out en el mapa con animación fluida
+        // Realiza el zoom out en el mapa con animación fluida
+    this.view = this.map.getView();
+    this.view.fit(this.view.getProjection().getExtent(), {
+      duration: 1000
+    });
   }
 }
