@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+
+  web:
+    container_name: c_openlayers
+    build: .
+    ports:
+      - 8082:80
