@@ -14,6 +14,8 @@ import Icon from 'ol/style/Icon';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 
+import XYZ from 'ol/source/XYZ';
+
 @Injectable({
   providedIn: 'root'
 })

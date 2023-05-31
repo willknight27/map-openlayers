@@ -29,7 +29,7 @@ export class PlacesService {
       });
   }
 
-  public async getUserLocation(): Promise<[number, number]>{
+  /* public async getUserLocation(): Promise<[number, number]>{
 
     return new Promise( (resolve, reject)=>{  
       navigator.geolocation.getCurrentPosition(
@@ -46,6 +46,6 @@ export class PlacesService {
         }
       );
     });
-  }
+  } */
 
 }
